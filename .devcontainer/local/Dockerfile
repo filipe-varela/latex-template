@@ -1,13 +1,19 @@
 FROM texlive/texlive:latest-full
 # ARG UID=10001
 
-RUN useradd \
-    --comment "" \
-    --home-dir "/home" \
-    --no-create-home \
-    --shell "/bin/bash" \
-    --uid "${UID}" \
-    pdfuser
+# RUN useradd \
+#     --comment "" \
+#     --home-dir "/home" \
+#     --no-create-home \
+#     --shell "/bin/bash" \
+#     --uid "${UID}" \
+#     pdfuser
+
+RUN groupadd -r pdfuser && useradd -r -g pdfuser pdfuser
+
+WORKDIR /home/pdfuser/document
+
+COPY . .
 
 RUN apt-get update && apt-get install -y \
     git perl git-lfs inkscape openssh-server\
@@ -17,6 +23,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/*
     
-# USER pdfuser
+USER pdfuser
 
 # RUN echo welcome to WebLaTeX2.0
