@@ -7,7 +7,7 @@
 	"build": {
 		"dockerfile": "Dockerfile"
 	},
-	// "remoteUser": "pdfuser", // Do not change this
+	"remoteUser": "pdfuser", // Do not change this
 	"features": {},
 	"customizations": {
 		"vscode": {
